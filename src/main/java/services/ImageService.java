@@ -8,5 +8,7 @@ public interface ImageService {
 
 	public void pull(String image);
 	
+	public void remove(String image);
+	
 	public List<Image> list();
 }

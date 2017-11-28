@@ -3,7 +3,6 @@ package services;
 import java.util.List;
 
 import com.github.dockerjava.api.model.Container;
-import com.github.dockerjava.api.model.Image;
 
 public interface DockerService {
 	
@@ -19,9 +18,5 @@ public interface DockerService {
 
 	public void stop(String container);
 	
-	public List<Image> listImages();
-	
-	public void pullImage(String image);
-
 	public List<Container> listContainers();
 }

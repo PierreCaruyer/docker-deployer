@@ -17,12 +17,12 @@ public class ClientController {
 	private ClientService clientService;
 
 	@RequestMapping(value="/clients", method=RequestMethod.GET)
-	public ModelAndView displayUserIndex() {
+	public ModelAndView viewUserIndex() {
 		return new ModelAndView("client_index");
 	}
 	
 	@RequestMapping(value="/clients/create", method=RequestMethod.GET)
-	public ModelAndView presentUserCreationForm() {
+	public ModelAndView viewUserCreationForm() {
 		return new ModelAndView("client_create");
 	}
 	
@@ -34,7 +34,7 @@ public class ClientController {
 	 * @return
 	 */
 	@RequestMapping(value="/clients/create", method=RequestMethod.POST)
-	public ModelAndView doUserCreation(@RequestParam("firstname") String firstname,
+	public ModelAndView createClient(@RequestParam("firstname") String firstname,
 									   @RequestParam("lastname") String lastname,
 									   @RequestParam("password") String password) {
 		clientService.createClient(firstname, lastname, password);
@@ -59,7 +59,7 @@ public class ClientController {
      * @return
      */
     @RequestMapping(value="/clients/{id}/delete", method=RequestMethod.POST)
-    public ModelAndView deleteClient(@PathVariable("id") int id) {
+    public ModelAndView removeClient(@PathVariable("id") int id) {
     	clientService.deleteClient(id);
     	return new ModelAndView("redirect:/clients/list");
     }

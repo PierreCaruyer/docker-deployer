@@ -27,7 +27,7 @@ public class DockerController {
 	}
 	
 	@RequestMapping(value="/containers/create", method=RequestMethod.POST)
-	public ModelAndView deployContainer(@RequestParam("image") String image) {
+	public ModelAndView createContainer(@RequestParam("image") String image) {
 		dockerService.create(image);
 		return new ModelAndView("redirect:/containers/list");
 	}
@@ -40,7 +40,7 @@ public class DockerController {
 	}
 	
 	@RequestMapping(value="/containers/{id}/delete", method=RequestMethod.POST)
-	public ModelAndView undeployContainer(@PathVariable("id") String id) {
+	public ModelAndView removeContainer(@PathVariable("id") String id) {
 		dockerService.remove(id);
 		return new ModelAndView("redirect:/containers/list");
 	}

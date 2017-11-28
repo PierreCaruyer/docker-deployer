@@ -2,18 +2,19 @@ package controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.DockerService;
+import services.ImageService;
 
 @Controller
 public class ImageController {
 	
 	@Autowired
-	private DockerService dockerService; 
+	private ImageService imageService;
 	
 	@RequestMapping(value = "/images", method = RequestMethod.GET)
 	public ModelAndView viewImagesIndex() {
@@ -23,7 +24,7 @@ public class ImageController {
 	@RequestMapping(value = "/images/list", method = RequestMethod.GET)
 	public ModelAndView listImages() {
 		ModelAndView model = new ModelAndView("image_list");
-		model.addObject("images", dockerService.listImages());
+		model.addObject("images", imageService.list());
 		return model;
 	}
 	
@@ -34,7 +35,12 @@ public class ImageController {
 	
 	@RequestMapping(value = "/images/pull", method = RequestMethod.POST)
 	public ModelAndView pullImage(@RequestParam("image") String image) {
-		dockerService.pullImage(image);
+		imageService.pull(image);
+		return new ModelAndView("redirect:/images/list");
+	}
+	
+	@RequestMapping(value = "/images/{id}/delete", method = RequestMethod.POST)
+	public ModelAndView deleteImage(@PathVariable("id") String id) {
 		return new ModelAndView("redirect:/images/list");
 	}
 }

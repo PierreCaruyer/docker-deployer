@@ -17,6 +17,7 @@
 				<tr>
 					<th>Image-ID</th>
 					<th>Size</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,6 +25,7 @@
 					<tr>
 						<td>${image.getId()}</td>
 						<td>${image.getSize()}</td>
+						<td><form action="/tomcat/images/${image.getId()}/delete" method="post"><input type="submit" value="Delete"/></form></td>
 					</tr>
 				</c:forEach>
 			</tbody>
