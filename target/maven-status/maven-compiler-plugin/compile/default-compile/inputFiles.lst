@@ -1,0 +1,10 @@
+/home/pierre/workspace/mvc/src/main/java/controllers/RestSampleController.java
+/home/pierre/workspace/mvc/src/main/java/services/SampleService.java
+/home/pierre/workspace/mvc/src/main/java/dao/ClientDAO.java
+/home/pierre/workspace/mvc/src/main/java/services/SampleServiceImpl.java
+/home/pierre/workspace/mvc/src/main/java/App.java
+/home/pierre/workspace/mvc/src/main/java/entities/Client.java
+/home/pierre/workspace/mvc/src/main/java/dao/JPAClientDAO.java
+/home/pierre/workspace/mvc/src/main/java/Startup.java
+/home/pierre/workspace/mvc/src/main/java/controllers/SampleController.java
+/home/pierre/workspace/mvc/src/main/java/dto/ClientDTO.java
