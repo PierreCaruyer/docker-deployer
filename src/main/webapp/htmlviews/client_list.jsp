@@ -11,7 +11,7 @@
 <body>
 
 	<form action="/tomcat/clients" method="get">
-		<input type="submit" value="Users index" />
+		<input type="submit" value="Clients index" />
 	</form>
 	
 	<table border="1">

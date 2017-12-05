@@ -10,6 +10,7 @@
       </form>
       <form action="/tomcat/containers/create" method="post">
       	<p>Image	 		: <input type="text" name="image" id="image"/></p>
+      	<p>Network mode (bridge|none|container|host) : 	  <input type="text" name="mode" id="mode"/></p>
      	<p><input type="submit" value="submit"/></p>
       </form>
    </body>

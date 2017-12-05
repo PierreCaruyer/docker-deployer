@@ -13,5 +13,8 @@
       <form action="/tomcat/images">
       	<input type="submit" value="Images" name="images" />
       </form>
+      <form action="/tomcat/networks">
+      	<input type="submit" value="Networks" name="networks" />
+      </form>
    </body>
 </html>
