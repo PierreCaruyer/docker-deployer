@@ -28,7 +28,7 @@ public class DockerController {
 	
 	@RequestMapping(value="/containers/create", method=RequestMethod.POST)
 	public ModelAndView createContainer(@RequestParam("image") String image) {
-		dockerService.create(image);
+		dockerService.create(image, "host");
 		return new ModelAndView("redirect:/containers/list");
 	}
 	

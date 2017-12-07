@@ -58,7 +58,7 @@ public class NetworkController {
 		return new ModelAndView("redirect:/networks/list");
 	}
 	
-	@PostMapping("/networks/{id]/delete")
+	@PostMapping("/networks/{id}/delete")
 	public ModelAndView removeNetwork(@PathVariable("id") String id) {
 		return new ModelAndView("redirect:/networks/list");
 	}
