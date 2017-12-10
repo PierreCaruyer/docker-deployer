@@ -17,8 +17,9 @@
 				<tr>
 					<th>Container-ID</th>
 					<th>Image</th>
-					<th>Container status</th>
+					<th>Status</th>
 					<th>Delete</th>
+					<th>Commit</th>
 					<th>Start/Stop</th>
 					<th>Pause/Resume</th>
 				</tr>
@@ -30,6 +31,7 @@
 						<td>${container.getImage()}</td>
 						<td>${container.getStatus()}</td>
 						<td><form action="/tomcat/containers/${container.getId()}/delete" method="post"><input type="submit" value="Delete"/></form></td>
+						<td><form action="/tomcat/containers/${container.getId()}/commit" method="post"><input type="submit" value="Commit"/></form></td>
 						<c:choose>
 							<c:when test="${container.getStatus().startsWith('Up')}">
 								<td><form action="/tomcat/containers/${container.getId()}/stop" method="post"><input type="submit" value="Stop"/></form></td>

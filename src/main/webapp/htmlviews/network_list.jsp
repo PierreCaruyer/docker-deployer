@@ -21,6 +21,7 @@
 				<tr>
 					<th>Network-ID</th>
 					<th>Name</th>
+					<th>Delete</th>
 					<th>Connected-containers</th>
 				</tr>
 			</thead>
@@ -30,13 +31,9 @@
 					<tr>
 						<td>${network.getId()}</td>
 						<td>${network.getName()}</td>
+						<td><form action="/tomcat/networks/${network.getId()}/delete" method="post"><input type="submit" value="Delete"/></form></td>
 						<td>
-							<c:forEach items="${requestScope.associatedContainers}" var="containers">
-								<p>
-									<c:forEach items="${containers}" var="container">
-										${container}
-									</c:forEach>
-								</p>
+							<c:forEach items="${requestScope.connectedContainers()}" var="containers">
 							</c:forEach>
 						</td>
 					</tr>

@@ -49,9 +49,11 @@ public class NetworkServiceImpl implements NetworkService {
 		List<Network> networks = list();
 		for(int i = 0; i < networks.size(); i++) {
 			Network n = networks.get(i);
+			System.out.println("Network " + n.getName());
 			String[] networkKeySet = n.getContainers().keySet().toArray(new String[n.getContainers().keySet().size()]);
 			for(String key : networkKeySet) {
 				String containerId = n.getContainers().get(key).getEndpointId();
+				System.out.println("\tContainer " + containerId);
 				connectedContainersIds.get(i).add(containerId);
 			}
 		}

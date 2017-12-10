@@ -52,14 +52,21 @@ public class NetworkController {
 		return new ModelAndView("redirect:/networks/list");
 	}
 	
+	@GetMapping("/networks/connect")
+	public ModelAndView viewDisconnectionForm() {
+		return new ModelAndView("network_disconnect");
+	}
+	
 	@PostMapping("/networks/disconnect")
-	public ModelAndView disconnectContainerToNetwork(@RequestParam("container") String container, @RequestParam("network") String network) {
+	public ModelAndView disconnectContainerToNetwork(@RequestParam("container") String container,
+													 @RequestParam("network") String network) {
 		networkService.disconnect(network, container);
 		return new ModelAndView("redirect:/networks/list");
 	}
 	
 	@PostMapping("/networks/{id}/delete")
 	public ModelAndView removeNetwork(@PathVariable("id") String id) {
+		networkService.remove(id);
 		return new ModelAndView("redirect:/networks/list");
 	}
 }

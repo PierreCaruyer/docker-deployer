@@ -9,8 +9,8 @@
 </head>
 
 	<body>
-		<form action="/tomcat/containers" method="get">
-			<input type="submit" value="Containers index" />
+		<form action="/tomcat/images" method="get">
+			<input type="submit" value="Images index" />
 		</form>
 		<table border="1">
 			<thead>

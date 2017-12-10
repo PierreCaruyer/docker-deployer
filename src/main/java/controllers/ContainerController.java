@@ -2,70 +2,76 @@ package controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.DockerService;
+import services.ContainerService;
 
 @Controller
-public class DockerController {
+public class ContainerController {
 	
 	@Autowired
-	private DockerService dockerService;
+	private ContainerService containerService;
 
-	@RequestMapping("/containers")
+	@GetMapping("/containers")
 	public ModelAndView viewContainersIndex() {
 		return new ModelAndView("container_index");
 	}
 	
-	@RequestMapping(value="/containers/create", method=RequestMethod.GET)
+	@GetMapping(value="/containers/create")
 	public ModelAndView viewContainerCreationForm() {
 		return new ModelAndView("container_create");
 	}
 	
-	@RequestMapping(value="/containers/create", method=RequestMethod.POST)
+	@PostMapping(value="/containers/create")
 	public ModelAndView createContainer(@RequestParam("image") String image) {
-		dockerService.create(image, "host");
+		containerService.create(image, "host");
 		return new ModelAndView("redirect:/containers/list");
 	}
 	
-	@RequestMapping(value="/containers/list", method=RequestMethod.GET)
+	@GetMapping(value="/containers/list")
 	public ModelAndView listContainers() {
 		ModelAndView model = new ModelAndView("container_list");
-		model.addObject("containers", dockerService.listContainers());
+		model.addObject("containers", containerService.listContainers());
 		return model;
 	}
 	
-	@RequestMapping(value="/containers/{id}/delete", method=RequestMethod.POST)
+	@PostMapping(value="/containers/{id}/delete")
 	public ModelAndView removeContainer(@PathVariable("id") String id) {
-		dockerService.remove(id);
+		containerService.remove(id);
 		return new ModelAndView("redirect:/containers/list");
 	}
 	
-	@RequestMapping(value="/containers/{id}/start", method=RequestMethod.POST)
+	@PostMapping(value="/containers/{id}/start")
 	public ModelAndView startContainer(@PathVariable("id") String id) {
-		dockerService.start(id);
+		containerService.start(id);
 		return new ModelAndView("redirect:/containers/list");
 	}
 	
-	@RequestMapping(value="/containers/{id}/stop", method=RequestMethod.POST)
+	@PostMapping(value="/containers/{id}/stop")
 	public ModelAndView stopContainer(@PathVariable("id") String id) {
-		dockerService.stop(id);
+		containerService.stop(id);
 		return new ModelAndView("redirect:/containers/list");
 	}
 	
-	@RequestMapping(value="/containers/{id}/pause", method=RequestMethod.POST)
+	@PostMapping("/containers/{id}/pause")
 	public ModelAndView pauseContainer(@PathVariable("id") String id) {
-		dockerService.pause(id);
+		containerService.pause(id);
 		return new ModelAndView("redirect:/containers/list");
 	}
 	
-	@RequestMapping(value="/containers/{id}/resume", method=RequestMethod.POST)
+	@PostMapping("/containers/{id}/resume")
 	public ModelAndView resumeContainer(@PathVariable("id") String id) {
-		dockerService.unpause(id);
+		containerService.unpause(id);
+		return new ModelAndView("redirect:/containers/list");
+	}
+	
+	@PostMapping("/containers/{id}/commit")
+	public ModelAndView commitContainer(@PathVariable("id") String id) {
+		containerService.commit(id);
 		return new ModelAndView("redirect:/containers/list");
 	}
 }

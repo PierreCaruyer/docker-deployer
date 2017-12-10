@@ -42,8 +42,7 @@ public class JPAClientDAO implements ClientDAO {
 
 		Client client = (Client)query.getSingleResult();
 
-		if(client == null) 
-			throw new ClientNotFoundException();
+		if(client == null) throw new ClientNotFoundException();
 		
 		return client;
 	}
@@ -55,9 +54,8 @@ public class JPAClientDAO implements ClientDAO {
 	}
 
 	public void deleteClient(int id) {
-		Client c = null;
 		try {
-			c = getClientById(id);
+			Client c = getClientById(id);
 			deleteClient(c);
 		} catch (ClientNotFoundException e) {
 			e.printStackTrace();

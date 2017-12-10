@@ -1,6 +1,5 @@
 package services;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -10,7 +9,7 @@ import com.github.dockerjava.api.model.Container;
 import utils.Docker;
 
 @Service
-public class DockerServiceImpl implements DockerService {
+public class ContainerServiceImpl implements ContainerService {
 
 	@Override
 	public void create(String container, String networkMode) {
@@ -37,11 +36,7 @@ public class DockerServiceImpl implements DockerService {
 
 	@Override
 	public void start(String container) {
-		try {
-			Runtime.getRuntime().exec("docker start " + container).waitFor();
-		} catch (InterruptedException | IOException e) {
-			e.printStackTrace();
-		}
+		Docker.client().startContainerCmd(container).exec();
 	}
 
 	@Override
@@ -49,6 +44,11 @@ public class DockerServiceImpl implements DockerService {
 		Docker.client().stopContainerCmd(container).exec();
 	}
 
+	@Override
+	public void commit(String container) {
+		Docker.client().commitCmd(container).withTag("myTag").exec();
+	}
+	
 	@Override
 	public List<Container> listContainers() {
 		return Docker.client().listContainersCmd().withShowAll(true).exec();

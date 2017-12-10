@@ -16,5 +16,8 @@
       <form action="/tomcat/networks/connect">
       	<input type="submit" value="Connect a container to a network" name="connect" />
       </form>
+      <form action="/tomcat/networks/disconnect">
+      	<input type="submit" value="Disconnect a container from a network" name="disconnect" />
+      </form>
    </body>
 </html>

@@ -6,7 +6,7 @@ import com.github.dockerjava.core.DockerClientBuilder;
 
 public class Docker {
 
-	private static DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder().build();
+	private static DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder().withApiVersion("1.21").build();
 	private static DockerClient docker = DockerClientBuilder.getInstance(config).build();
 	
 	public static DockerClient client() {

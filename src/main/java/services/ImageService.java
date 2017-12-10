@@ -11,4 +11,7 @@ public interface ImageService {
 	public void remove(String image);
 	
 	public List<Image> list();
+	
+	public void build(String image);
+	
 }
