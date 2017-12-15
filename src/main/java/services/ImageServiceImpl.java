@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -19,8 +20,12 @@ public class ImageServiceImpl implements ImageService{
 	}
 
 	@Override
-	public List<Image> list() {
-		return Docker.client().listImagesCmd().exec();
+	public List<utils.Image> list() {
+		List<utils.Image> images = new ArrayList<>();
+		for(Image i : Docker.client().listImagesCmd().exec()) {
+			images.add(new utils.Image(i.getId(), i.getSize(), i.getRepoTags()[0]));
+		}
+		return images;
 	}
 	
 	@Override

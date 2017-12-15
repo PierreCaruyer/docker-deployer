@@ -13,8 +13,8 @@ import utils.Docker;
 public class NetworkServiceImpl implements NetworkService {
 
 	@Override
-	public void create(String network) {
-		Docker.client().createNetworkCmd().withName(network).exec();
+	public void create(String network, String driver) {
+		Docker.client().createNetworkCmd().withName(network).withDriver(driver).exec();
 	}
 	
 	@Override
@@ -39,25 +39,14 @@ public class NetworkServiceImpl implements NetworkService {
 	}
 	
 	@Override
-	public List<Network> list() {
-		return Docker.client().listNetworksCmd().exec();
-	}
-	
-	@Override
-	public List<List<String>> listConnectedContainers() {
-		List<List<String>> connectedContainersIds = new ArrayList<>();
-		List<Network> networks = list();
-		for(int i = 0; i < networks.size(); i++) {
-			Network n = networks.get(i);
-			System.out.println("Network " + n.getName());
-			String[] networkKeySet = n.getContainers().keySet().toArray(new String[n.getContainers().keySet().size()]);
-			for(String key : networkKeySet) {
-				String containerId = n.getContainers().get(key).getEndpointId();
-				System.out.println("\tContainer " + containerId);
-				connectedContainersIds.get(i).add(containerId);
-			}
+	public List<utils.Network> list() {
+		List<utils.Network> networks = new ArrayList<>();
+		for(Network n : Docker.client().listNetworksCmd().exec()) {
+			utils.Network network = new utils.Network(n.getId(), n.getName());
+			for(String s : n.getContainers().keySet().toArray(new String[n.getContainers().keySet().size()]))
+				network.addContainer(s.substring(0, 12));
+			networks.add(network);
 		}
-		return connectedContainersIds;
+		return networks;
 	}
-
 }

@@ -16,6 +16,7 @@
 			<thead>
 				<tr>
 					<th>Image-ID</th>
+					<th>Repository Tag</th>
 					<th>Size</th>
 					<th>Delete</th>
 				</tr>
@@ -24,6 +25,7 @@
 				<c:forEach items="${requestScope.images}" var="image">
 					<tr>
 						<td>${image.getId()}</td>
+						<td>${image.getRepoTag()}</td>
 						<td>${image.getSize()}</td>
 						<td><form action="/tomcat/images/${image.getId()}/delete" method="post"><input type="submit" value="Delete"/></form></td>
 					</tr>

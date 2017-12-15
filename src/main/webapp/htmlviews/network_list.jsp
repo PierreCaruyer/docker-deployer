@@ -33,7 +33,8 @@
 						<td>${network.getName()}</td>
 						<td><form action="/tomcat/networks/${network.getId()}/delete" method="post"><input type="submit" value="Delete"/></form></td>
 						<td>
-							<c:forEach items="${requestScope.connectedContainers()}" var="containers">
+							<c:forEach items="${network.connectedContainers()}" var="container">
+								<p>${container}</p>
 							</c:forEach>
 						</td>
 					</tr>

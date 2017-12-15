@@ -25,7 +25,6 @@ public class NetworkController {
 	public ModelAndView listNetworks() {
 		ModelAndView model = new ModelAndView("network_list");
 		model.addObject("networks", networkService.list());
-		model.addObject("associatedContainers", networkService.listConnectedContainers());
 		return model;
 	}
 	
@@ -35,8 +34,9 @@ public class NetworkController {
 	}
 	
 	@PostMapping("/networks/create")
-	public ModelAndView createNetwork(@RequestParam("network") String network) {
-		networkService.create(network);
+	public ModelAndView createNetwork(@RequestParam("network") String network,
+									  @RequestParam("driver") String driver) {
+		networkService.create(network, driver);
 		return new ModelAndView("redirect:/networks/list");
 	}
 	
@@ -50,11 +50,6 @@ public class NetworkController {
 												  @RequestParam("network") String network) {
 		networkService.connect(network, container);
 		return new ModelAndView("redirect:/networks/list");
-	}
-	
-	@GetMapping("/networks/connect")
-	public ModelAndView viewDisconnectionForm() {
-		return new ModelAndView("network_disconnect");
 	}
 	
 	@PostMapping("/networks/disconnect")
