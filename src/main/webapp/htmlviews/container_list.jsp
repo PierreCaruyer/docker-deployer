@@ -27,7 +27,7 @@
 			<tbody>
 				<c:forEach items="${requestScope.containers}" var="container">
 					<tr>
-						<td>${container.getId()}</td>
+						<td>${container.getId().substring(0,12)}</td>
 						<td>${container.getImage()}</td>
 						<td>${container.getStatus()}</td>
 						<td><form action="/tomcat/containers/${container.getId()}/delete" method="post"><input type="submit" value="Delete"/></form></td>
@@ -35,17 +35,18 @@
 						<c:choose>
 							<c:when test="${container.getStatus().startsWith('Up')}">
 								<td><form action="/tomcat/containers/${container.getId()}/stop" method="post"><input type="submit" value="Stop"/></form></td>
+								<c:choose>
+									<c:when test="${container.getStatus().contains('Paused')}">
+										<td><form action="/tomcat/containers/${container.getId()}/resume" method="post"><input type="submit" value="Resume"/></form></td>
+									</c:when>
+									<c:otherwise>
+										<td><form action="/tomcat/containers/${container.getId()}/pause" method="post"><input type="submit" value="Pause"/></form></td>
+									</c:otherwise>
+								</c:choose>
 							</c:when>
 							<c:otherwise>
 								<td><form action="/tomcat/containers/${container.getId()}/start" method="post"><input type="submit" value="Start"/></form></td>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${container.getStatus().contains('Paused')}">
-								<td><form action="/tomcat/containers/${container.getId()}/resume" method="post"><input type="submit" value="Resume"/></form></td>
-							</c:when>
-							<c:otherwise>
-								<td><form action="/tomcat/containers/${container.getId()}/pause" method="post"><input type="submit" value="Pause"/></form></td>
+								<td></td>
 							</c:otherwise>
 						</c:choose>
 					</tr>

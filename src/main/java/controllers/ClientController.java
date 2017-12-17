@@ -26,25 +26,14 @@ public class ClientController {
 		return new ModelAndView("client_create");
 	}
 	
-	/**
-	 * POST
-	 * @param firstname
-	 * @param lastname
-	 * @param password
-	 * @return
-	 */
 	@PostMapping("/clients/create")
 	public ModelAndView createClient(@RequestParam("firstname") String firstname,
-									   @RequestParam("lastname") String lastname,
-									   @RequestParam("password") String password) {
+									 @RequestParam("lastname") String lastname,
+									 @RequestParam("password") String password) {
 		clientService.createClient(firstname, lastname, password);
 		return new ModelAndView("redirect:/clients/list");
 	}
 	
-	/**
-	 * GET
-	 * @return
-	 */
     @GetMapping("/clients/list")
     public ModelAndView listClients() {
     	ModelAndView model = new ModelAndView("client_list");
@@ -52,12 +41,6 @@ public class ClientController {
     	return model;
     }
     
-    
-    /**
-     * DELETE
-     * @param id
-     * @return
-     */
     @PostMapping("/clients/{id}/delete")
     public ModelAndView removeClient(@PathVariable("id") int id) {
     	clientService.deleteClient(id);

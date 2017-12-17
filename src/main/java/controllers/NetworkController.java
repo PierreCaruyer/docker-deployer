@@ -52,6 +52,11 @@ public class NetworkController {
 		return new ModelAndView("redirect:/networks/list");
 	}
 	
+	@GetMapping("/networks/disconnect")
+	public ModelAndView viewDisonnectionForm() {
+		return new ModelAndView("network_connect");
+	}
+	
 	@PostMapping("/networks/disconnect")
 	public ModelAndView disconnectContainerToNetwork(@RequestParam("container") String container,
 													 @RequestParam("network") String network) {

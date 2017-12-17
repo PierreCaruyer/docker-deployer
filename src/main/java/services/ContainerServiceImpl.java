@@ -12,10 +12,13 @@ import utils.Docker;
 public class ContainerServiceImpl implements ContainerService {
 
 	@Override
-	public void create(String container, String networkMode) {
+	public void create(String container, String networkMode, String cmd) {
 		Docker.client().createContainerCmd(container)
-			.withNetworkDisabled(false)
 			.withNetworkMode(networkMode)
+			.withNetworkDisabled(false)
+			.withAttachStdin(true)
+			.withTty(true)
+			.withCmd(cmd)
 			.exec();
 	}
 

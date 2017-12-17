@@ -6,7 +6,7 @@ import com.github.dockerjava.api.model.Container;
 
 public interface ContainerService {
 	
-	public void create(String container, String networkMode);
+	public void create(String container, String networkMode, String cmd);
 
 	public void remove(String container);
 

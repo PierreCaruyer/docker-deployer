@@ -21,37 +21,39 @@ public class ContainerController {
 		return new ModelAndView("container_index");
 	}
 	
-	@GetMapping(value="/containers/create")
+	@GetMapping("/containers/create")
 	public ModelAndView viewContainerCreationForm() {
 		return new ModelAndView("container_create");
 	}
 	
-	@PostMapping(value="/containers/create")
-	public ModelAndView createContainer(@RequestParam("image") String image) {
-		containerService.create(image, "host");
+	@PostMapping("/containers/create")
+	public ModelAndView createContainer(@RequestParam("image") String image,
+										@RequestParam("driver") String driver,
+										@RequestParam("cmd") String cmd) {
+		containerService.create(image, driver, cmd);
 		return new ModelAndView("redirect:/containers/list");
 	}
 	
-	@GetMapping(value="/containers/list")
+	@GetMapping("/containers/list")
 	public ModelAndView listContainers() {
 		ModelAndView model = new ModelAndView("container_list");
 		model.addObject("containers", containerService.listContainers());
 		return model;
 	}
 	
-	@PostMapping(value="/containers/{id}/delete")
+	@PostMapping("/containers/{id}/delete")
 	public ModelAndView removeContainer(@PathVariable("id") String id) {
 		containerService.remove(id);
 		return new ModelAndView("redirect:/containers/list");
 	}
 	
-	@PostMapping(value="/containers/{id}/start")
+	@PostMapping("/containers/{id}/start")
 	public ModelAndView startContainer(@PathVariable("id") String id) {
 		containerService.start(id);
 		return new ModelAndView("redirect:/containers/list");
 	}
 	
-	@PostMapping(value="/containers/{id}/stop")
+	@PostMapping("/containers/{id}/stop")
 	public ModelAndView stopContainer(@PathVariable("id") String id) {
 		containerService.stop(id);
 		return new ModelAndView("redirect:/containers/list");
